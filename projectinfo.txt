@@ -1,0 +1,35 @@
+StakeHolders:-
+
+1.Admin
+2.User
+
+Admin Functionalities:-
+
+1.Categories CRUD
+2.SubCategories CRUD
+3.Can see all events
+4.Can see all communities
+5.Can see all users
+6.Can see all anylatics
+
+User Functionalities:-
+
+Signup & Login
+2.Can explore Events according to location
+3.User can join that Events
+4.User and Event Creater can do Posts and comments related to that event.
+
+
+Technologies:-
+
+Front End / Backend 
+Next JS
+
+Database
+Mongodb
+
+CSS        , TAILWIND
+Library    , Shadcn
+
+API Testing
+postman
