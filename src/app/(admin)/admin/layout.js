@@ -5,14 +5,14 @@ function Layout({ children }) {
     return (
   <html>
     <body>
-      <Tabs defaultValue="dashboard" className="w-[400px]">
-        <TabsList>
+      <Tabs defaultValue="dashboard" className="w-full">
+        <TabsList className="bg-black h-12 text-white">
           <Link href={"/admin/dashboard"}>
             <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
           </Link>
 
           <Link href={"/admin/users"}>
-            <TabsTrigger value="user">User</TabsTrigger>
+            <TabsTrigger value="users">Users</TabsTrigger>
           </Link>
 
           <Link href={"/admin/events"}>
