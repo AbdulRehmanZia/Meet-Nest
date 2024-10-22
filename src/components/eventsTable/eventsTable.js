@@ -65,7 +65,7 @@ const events = [
           </TableHeader>
           <TableBody>
             {events.map((event) => (
-              <TableRow key={event.thumbnail}>
+              <TableRow key={event.eventName}>
                 <TableCell>
                   <Image 
                   src={event.thumbnail}
