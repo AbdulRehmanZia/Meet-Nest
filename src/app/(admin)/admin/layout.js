@@ -3,8 +3,8 @@ import Link from "next/link";
 
 function Layout({ children }) {
     return (
-  <html>
-    <body>
+  <html >
+    <body >
       <Tabs defaultValue="dashboard" className="w-full">
         <TabsList className="bg-black h-12 text-white">
           <Link href={"/admin/dashboard"}>
