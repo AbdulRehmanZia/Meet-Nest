@@ -2,10 +2,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 
 function Layout({ children }) {
-    return (
-  <html >
-    <body >
-      <Tabs defaultValue="dashboard" className="w-full">
+    return (<html lang="en">
+      <body>
+      <Tabs defaultValue="dashboard">
         <TabsList className="bg-black h-12 text-white">
           <Link href={"/admin/dashboard"}>
             <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
@@ -33,9 +32,8 @@ function Layout({ children }) {
         <TabsContent value="categories">{children} </TabsContent>
         <TabsContent value="subcategories">{children} </TabsContent>
       </Tabs>
-      
-    </body>
-  </html>
+      </body>
+      </html>
     )
 }
 
