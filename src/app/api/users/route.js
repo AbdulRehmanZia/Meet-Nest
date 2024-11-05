@@ -4,7 +4,10 @@ import { User } from "@/lib/models/users";
 export async function GET(request) {
   await connectDB();
   const users = await User.find();
-  return Response.json(users, { status: 200 });
+  return Response.json(
+    { users, msg: "Users Fetched Successfully" },
+    { status: 200 }
+  );
 }
 
 export async function POST(request) {
@@ -14,7 +17,13 @@ export async function POST(request) {
   try {
     const newUser = new User(obj);
     await newUser.save();
-    return Response.json({ status: 201, user: newUser });
+    return Response.json(
+      {
+        user: newUser,
+        msg: "User Added Successfully",
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error(error);
     return Response.json({
