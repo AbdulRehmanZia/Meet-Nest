@@ -26,11 +26,13 @@ export async function POST(request) {
     );
   } catch (error) {
     console.error(error);
-    return Response.json({
-      status: 400,
-      message: "Error creating user",
-      error: error.message,
-    });
+    return Response.json(
+      {
+        message: "Error creating user",
+        error: error.message,
+      },
+      { status: 400 }
+    );
   }
 }
 

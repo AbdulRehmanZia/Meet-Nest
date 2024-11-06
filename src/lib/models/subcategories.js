@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const subcategoriesSchema = new Schema({
-  title: String,
+  title: {type: String, required: true},
   description: String,
-  thumbnail: String,
-  category: { type: mongoose.Types.ObjectId, ref: "categories" },
+  thumbnail: {type: String, required: true},
+  category: { type: mongoose.Types.ObjectId, ref: "categories", required: true },
 });
 
-export const subcategoryModal = mongoose.model("subategories",subcategoriesSchema);
+export const Subcategory = mongoose.models.subcategories || mongoose.model("subcategories", subcategoriesSchema);

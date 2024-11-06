@@ -8,6 +8,7 @@ const eventsSchema = new Schema({
   endDate: String,
   startTime: String,
   endTime: String,
+  category: {type: mongoose.Types.ObjectId, ref: "categories"},
   createdBy: {type: mongoose.Types.ObjectId, ref: "users"},
   going: [{type: mongoose.Types.ObjectId, ref: "users"}],
   address: String,
@@ -17,4 +18,4 @@ const eventsSchema = new Schema({
   },
 });
 
-export const eventModal = mongoose.model("events", eventsSchema);
+export const Events = mongoose.models.events || mongoose.model("events", eventsSchema);
