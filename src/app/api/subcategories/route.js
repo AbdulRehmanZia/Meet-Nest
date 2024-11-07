@@ -3,9 +3,19 @@ import { Subcategory } from "@/lib/models/subcategories";
 
 export async function GET(request) {
   await connectDB();
-  const subcategories = await Subcategory.find();
+  
+  const reqUrl = request.url
+  const {searchParams} = new URL(reqUrl)
+  
+  const query = {}
+  if(searchParams.get("category")) {
+      query.category = searchParams.get("category")
+    }
+    console.log("query =>", query);
+
+  const subcategories = await Subcategory.find(query).populate("category", "title");
   return Response.json(
-    {
+      {
       subcategories,
       msg: "Subategories Fetched Successfully",
     },
