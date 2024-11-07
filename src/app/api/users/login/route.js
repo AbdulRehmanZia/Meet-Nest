@@ -2,39 +2,36 @@ import { connectDB } from "@/lib/db/connectDB";
 import { User } from "@/lib/models/users";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-export async function GET(request) {
-  await connectDB();
-  const users = await User.find();
-  return Response.json(
-    { users, msg: "Users Fetched Successfully" },
-    { status: 200 }
-  );
-}
+
 
 export async function POST(request) {
   await connectDB();
   const obj = await request.json();
   const user = await User.findOne({email: obj.email});
-
-if(user) {
-  return Response.json({error: true, msg: "User with this email already exists"}, {status: 403})
-}
-const saltRounds = 10;
-const hashedPassword = await bcrypt.hash(obj.password, saltRounds)
-obj.password = hashedPassword
-console.log("obj=> ",obj);
+  if(!user) {
+      return Response.json({error: true, msg: "User with this email doesn't exists"}, {status: 404})
+    }
+    
+    const isPasswordValid = bcrypt.compare(obj.password, user.password)
+    if(isPasswordValid) {
+        return Response.json(
+            {
+                error: true,
+                msg: "In-Valid Password"
+            },
+            {status: 403}
+        )
+    }
 
 try {
-  const newUser = new User(obj);
-  await newUser.save();
-  var token = jwt.sign({ _id: newUser._id, role: newUser.role }, process.env.JWT_KEY);
+  var token = jwt.sign({ _id: user._id, role: user.role }, process.env.JWT_KEY);
     return Response.json(
       {
-        user: newUser,
+        user,
         token,
         msg: "User Added Successfully",
       },
-      { status: 201 }
+      { status: 200 }
     );
   } catch (error) {
     console.error(error);

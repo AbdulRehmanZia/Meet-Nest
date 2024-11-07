@@ -26,6 +26,7 @@ export async function GET(request) {
 export async function POST(request) {
   await connectDB();
   const obj = await request.json();
+  
   try {
     const newSubCategory = new Subcategory(obj);
     await newSubCategory.save();

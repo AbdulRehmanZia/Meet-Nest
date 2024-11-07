@@ -7,6 +7,11 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   address: { type: String },
   bio: { type: String },
+  role: {
+    type: String,
+    default: "user",
+    enum: ["user", "admin"],
+  },
   profileImg: { type: String },
   location: {
     lat: Number,
@@ -14,4 +19,5 @@ const userSchema = new Schema({
   },
 });
 
-export const User = mongoose.models.users || mongoose.model("users", userSchema);
+export const User =
+  mongoose.models.users || mongoose.model("users", userSchema);
