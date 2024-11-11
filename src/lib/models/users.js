@@ -11,6 +11,7 @@ const userSchema = new Schema({
     type: String,
     default: "user",
     enum: ["user", "admin"],
+    required : true
   },
   profileImg: { type: String },
   location: {

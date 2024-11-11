@@ -27,6 +27,8 @@ console.log("obj=> ",obj);
 try {
   const newUser = new User(obj);
   await newUser.save();
+  console.log("New User=>", newUser);
+  
   var token = jwt.sign({ _id: newUser._id, role: newUser.role }, process.env.JWT_KEY);
   
     return Response.json(
