@@ -1,59 +1,21 @@
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
 import { connectDB } from "@/lib/db/connectDB";
 import { User } from "@/lib/models/users";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+export async function POST(request){
+    await connectDB()
+    const userObj = await request.json()
+    const user = await User.findOne({email : userObj.email})
+    if(!user){
+        return Response.json({ error : "User not found"}, {status : 404})
+    }
 
-export async function POST(request) {
-  await connectDB();
-  const obj = await request.json();
-  const user = await User.findOne({ email: obj.email });
-  if (!user) {
-    return Response.json(
-      { error: true, msg: "User with this email doesn't exists" },
-      { status: 404 }
-    );
-  }
+    const isPasswordValid = await bcrypt.compare(user.password, userObj.password)
+    if(!isPasswordValid){
+        return Response.json({error : "Incorrect Password"}, {status : 403})
+    }
 
-  const isPasswordValid = await bcrypt.compare(obj.password, user.password);
-  if (!isPasswordValid) {
-    return Response.json(
-      {
-        error: true,
-        msg: "In-Valid Password",
-      },
-      { status: 403 }
-    );
-  }
+    var token = jwt.sign({_id : user._id, role : user.role}, process.env.JWT_KEY)
 
-  try {
-    var token = jwt.sign(
-      { _id: user._id, role: user.role },
-      process.env.JWT_KEY
-    );
-    return Response.json(
-      {
-        user,
-        token,
-        msg: "User Login Successfully",
-      },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error(error);
-    return Response.json(
-      {
-        message: "Error creating user",
-        error: error.message,
-      },
-      { status: 400 }
-    );
-  }
-}
-
-export async function PUT(request) {
-  // Implement PUT logic here
-}
-
-export async function DELETE(request) {
-  // Implement DELETE logic here
+    return Response.json({msg : "Login Successful", user, token}, {status : 200})
 }
