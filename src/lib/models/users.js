@@ -2,8 +2,6 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  fullname: { type: String },
-  email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   address: { type: String },
   bio: { type: String },
@@ -13,6 +11,8 @@ const userSchema = new Schema({
     enum: ["user", "admin"],
     required : true
   },
+  fullname: { type: String },
+  email: { type: String, required: true, unique: true },
   profileImg: { type: String },
   location: {
     lat: Number,
