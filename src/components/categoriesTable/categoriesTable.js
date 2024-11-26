@@ -36,6 +36,7 @@ export default async function CategoriesTable() {
                   src={category.thumbnail}
                   height={150}
                   width={150}
+                  alt= {category.thumbnail}
                   />
                   
                   </TableCell>
