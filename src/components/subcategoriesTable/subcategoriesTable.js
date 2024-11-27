@@ -11,22 +11,21 @@ import {
   } from "@/components/ui/table";
 import Image from "next/image";
 import DropDown from "../dropDown/dropDown";
+import AddSubCategory from "../addSubCategory/addSubCategory";
   
 
-
-  
-  
   export default async function SubCategoriesTable() {
     const subcategories = await getSubCategories()
-    const categories = await getCategories()
+    const categories = await getCategories()    
     console.log("categories=>", categories);
     
     return (
-      <div className="min-h-screen mx-auto flex justify-center">
-        <div className="flex">
-
+      <>
+      <div className="flex justify-between my-4">
+      <AddSubCategory />
               <DropDown categories={categories}/>
         </div>
+      <div className="min-h-screen mx-auto flex justify-center">
         <Table >
           <TableCaption>Sub-Categories</TableCaption>
           <TableHeader>
@@ -56,7 +55,9 @@ import DropDown from "../dropDown/dropDown";
             ))}
           </TableBody>
         </Table>
+        
       </div>
+      </>
     );
   }
   

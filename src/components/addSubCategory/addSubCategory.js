@@ -72,7 +72,7 @@ export default function AddSubCategory() {
         </DialogHeader>
         <form
           ref={formRef}
-          action={handleAddCategory}
+          action={handleAddSubCategory}
           className={"grid items-start gap-4"}
         >
           <div className="grid gap-2">
