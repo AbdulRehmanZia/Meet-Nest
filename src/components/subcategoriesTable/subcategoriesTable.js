@@ -1,3 +1,4 @@
+
 import { getCategories } from "@/action/categories";
 import { getSubCategories } from "@/action/subcategories";
 import {
@@ -14,7 +15,9 @@ import DropDown from "../dropDown/dropDown";
 import AddSubCategory from "../addSubCategory/addSubCategory";
   
 
-  export default async function SubCategoriesTable() {
+  export default async function SubCategoriesTable({ searchParams }) {
+    console.log("Search Params in SubCategoriesTable =>", searchParams);
+
     const subcategories = await getSubCategories()
     const categories = await getCategories()    
     console.log("categories=>", categories);

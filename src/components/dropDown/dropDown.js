@@ -6,14 +6,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 export default function DropDown({ categories }) {
   const categoryList = categories?.categories;
   console.log("Category List=>", categoryList);
   const searchParams = useSearchParams();
-  const handleSelectCategory = (term) => {
-    console.log(term);
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  const handleSelectCategory = (category) => {
+    console.log(category);
+    const params = new URLSearchParams(searchParams);
+    if (category) {
+      params.set("category", category);
+    } else {
+      params.delete("category");
+    }
+    replace(`${pathname}?${params.toString()}`);
   };
 
   return (

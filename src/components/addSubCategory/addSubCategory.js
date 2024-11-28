@@ -61,7 +61,7 @@ export default function AddSubCategory() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Add Category</Button>
+        <Button variant="outline">Add Subcategory</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -99,7 +99,7 @@ export default function AddSubCategory() {
             <Input required name="thumbnail" type="file" />
           </div>
           <Button disabled={loading} type="submit">
-            {loading ? "Loading...." : "Add Category"}
+            {loading ? "Loading...." : "Add Subcategory"}
           </Button>
         </form>
       </DialogContent>
