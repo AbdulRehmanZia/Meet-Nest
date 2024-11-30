@@ -15,8 +15,16 @@ import {
 import { uploadImage } from "@/action/upload";
 import { addSubCategory } from "@/action/subcategories";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-export default function AddSubCategory() {
+export default function AddSubCategory({categories}) {
+  const categoryList = categories?.categories
   const { toast } = useToast();
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
@@ -30,12 +38,13 @@ export default function AddSubCategory() {
     console.log("Form Data=>", formData);
     setLoading(true);
     let uploadLink = await uploadImage(formData);
-    // console.log("uploadLink =>", uploadLink)
     const obj = {
       title: formData.get("title"),
       description: formData.get("description"),
+      category: formData.get("category"),
       thumbnail: uploadLink,
     };
+    console.log("obj =>", obj)
     await addSubCategory(obj);
     formRef?.current?.reset();
     setLoading(false);
@@ -97,6 +106,22 @@ export default function AddSubCategory() {
           <div className="grid gap-2">
             <Label htmlFor="thumbnail">Thumbnail</Label>
             <Input required name="thumbnail" type="file" />
+
+            <Select  name="category">
+      <SelectTrigger >
+        <SelectValue placeholder="Select Category" />
+      </SelectTrigger>
+      <SelectContent>
+       
+        {categoryList &&
+          categoryList?.map((data) => (
+            <SelectItem value={data._id} key={data._id}>
+              {data.title}
+            </SelectItem>
+          ))}
+      </SelectContent>
+    </Select>
+  ;
           </div>
           <Button disabled={loading} type="submit">
             {loading ? "Loading...." : "Add Subcategory"}

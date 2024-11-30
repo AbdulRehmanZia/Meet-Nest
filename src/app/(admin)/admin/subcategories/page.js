@@ -18,14 +18,14 @@ import AddSubCategory from "../../../../components/addSubCategory/addSubCategory
   export default async function SubCategoriesTable({ searchParams  }) {
     console.log("Search Params in SubCategoriesTable =>", searchParams)
 
-    const subcategories = await getSubCategories()
+    const subcategories = await getSubCategories(searchParams?.category)
     const categories = await getCategories()    
     // console.log("categories=>", categories);
     
     return (
       <>
       <div className="flex justify-between my-4">
-      <AddSubCategory />
+      <AddSubCategory categories={categories}/>
               <DropDown categories={categories}/>
         </div>
       <div className="min-h-screen mx-auto flex justify-center">

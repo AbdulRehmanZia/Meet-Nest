@@ -1,3 +1,4 @@
+import { getUsers } from "@/action/users";
 import {
     Table,
     TableBody,
@@ -7,52 +8,13 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table";
+import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import Image from "next/image";
   
-  const users = [
-    {
-      fullname: "John Doe",
-      profilePic: "https://github.com/shadcn.png",
-      age: 28,
-      location: "New York, USA",
-      email: "johndoe@example.com",
-      numberOfEvents: 2,
-    },
-    {
-      fullname: "Jane Smith",
-      profilePic: "https://github.com/shadcn.png",
-      age: 32,
-      location: "London, UK",
-      email: "janesmith@example.com",
-      numberOfEvents: 1,
-    },
-    {
-      fullname: "Carlos Hernandez",
-      profilePic: "https://github.com/shadcn.png",
-      age: 24,
-      location: "Mexico City, Mexico",
-      email: "carloshernandez@example.com",
-      numberOfEvents: 4,
-    },
-    {
-      fullname: "Aiko Tanaka",
-      profilePic: "https://github.com/shadcn.png",
-      age: 29,
-      location: "Tokyo, Japan",
-      email: "aikotanaka@example.com",
-      numberOfEvents: 10,
-    },
-    {
-      fullname: "Emma Müller",
-      profilePic: "https://github.com/shadcn.png",
-      age: 26,
-      location: "Berlin, Germany",
-      email: "emmamuller@example.com",
-      numberOfEvents: 6,
-    },
-  ];
   
-  export default function UsersTable() {
+  
+  export default async function UsersTable() {
+    const users = await getUsers()
     return (
       
       <div className="min-h-screen mx-auto">
@@ -68,15 +30,14 @@ import Image from "next/image";
               <TableHead >Events</TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
-            {users.map((user) => (
+          <TableBody >
+            {users?.users?.map((user) => (
               <TableRow key={user.fullname}>
                 <TableCell>
-                  <Image 
-                  src={user.profilePic}
-                  height={50}
-                  width={50}
-                  />
+                <Avatar>
+                  <AvatarImage height={150} width={150} src={user.profileImg} />
+                  <AvatarFallback>-</AvatarFallback>
+                </Avatar>
                   
                   </TableCell>
                 <TableCell>{user.fullname}</TableCell>
