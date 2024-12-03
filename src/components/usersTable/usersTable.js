@@ -36,7 +36,7 @@ import Image from "next/image";
                 <TableCell>
                 <Avatar>
                   <AvatarImage height={150} width={150} src={user.profileImg} />
-                  <AvatarFallback>-</AvatarFallback>
+                  <AvatarFallback>No Profile Pic</AvatarFallback>
                 </Avatar>
                   
                   </TableCell>
